@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #ffb3d9, #ffccf2, #f3eaff);
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      color: #4e4b6f;
+    }
+    .quote-container {
+      display: none;
+      text-align: center;
+      animation: fadeIn 1s forwards;
+    }
+    .quote {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      color: #ff4d95;
+      margin: 20px 0;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: slideIn 1s forwards;
+    }
+    .gift-box {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(to bottom, #ff4d95, #ff80b2);
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      animation: bounce 1s infinite alternate;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: white;
+    }
+    .final-message {
+      font-size: 3rem;
+      font-family: 'Cursive', sans-serif;
+      text-shadow: 0 0 10px #fff, 0 0 20px #ff4d95;
+      animation: glow 1.5s infinite alternate;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideIn {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #ff4d95, 0 0 20px #ff80b2, 0 0 30px #ff4d95;
+      }
+      to {
+        text-shadow: 0 0 20px #ff80b2, 0 0 30px #ff4d95, 0 0 40px #ff80b2;
+      }
+    }
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      animation: confetti-fall 4s linear infinite;
+    }
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(0) rotate(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="quote-container" class="quote-container">
+    <div id="quote" class="quote">Click the gift box to see your first birthday surprise!</div>
+  </div>
+  <div id="gift-box" class="gift-box">🎁</div>
+  <div id="final-message" class="quote-container" style="display: none;">
+    <div class="final-message">🎂 Happy Birthday, Minnu! 🎉</div>
+  </div>
+
+  <script>
+    const quotes = [
+      "🌸 You shine brighter than all the stars in the sky.",
+      "🎀 May your day be filled with joy, laughter, and love, just like you!",
+      "💖 You're the kind of girl who makes everything better, enjoy every moment!",
+      "✨ Here's to a year full of blessings, laughter, and endless happiness!",
+      "🎂 You are loved more than words can express, and I'm so grateful to have you as a friend  in my life!",
+      " Finally if you feel discomfortabel with my behaviour till now i am sorry",
+    ];
+    let currentQuoteIndex = 0;
+
+    const quoteContainer = document.getElementById('quote-container');
+    const quoteText = document.getElementById('quote');
+    const giftBox = document.getElementById('gift-box');
+    const finalMessage = document.getElementById('final-message');
+
+    giftBox.addEventListener('click', () => {
+      if (currentQuoteIndex < quotes.length) {
+        quoteText.textContent = quotes[currentQuoteIndex];
+        quoteText.style.animation = 'slideIn 1s forwards';
+        quoteContainer.style.display = 'block';
+        currentQuoteIndex++;
+      } else {
+        giftBox.style.display = 'none';
+        quoteContainer.style.display = 'none';
+        finalMessage.style.display = 'block';
+        launchConfetti();
+      }
+    });
+
+    function launchConfetti() {
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = `${Math.random() * 100}vw`;
+        confetti.style.backgroundColor = getRandomColor();
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 4000);
+      }
+    }
+
+    function getRandomColor() {
+      const colors = ['#ff80b2', '#f5c2f1', '#ff8b99', '#ff69b4', '#ff4d95'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+  </script>
+</body>
+</html>
